@@ -8,58 +8,17 @@
 #include <vector>
 #include <memory>
 
-bool verbosity = false;
-int magic_evt_code = 331;
+static bool verbosity = false;
+static int magic_evt_code = 331;
+static const char* device_file_path = "/proc/bus/input/devices";
 
 typedef struct device {
     std::string name;
     std::string evt_n;
 } device_t;
 
-enum PenStatus {
-    LOW,
-    HIGH
-};
 
-/*
-std::optional<std::string> find_event_number(const char* device_name) {
-    for (std::string line; getline(devices, line);) {
-        if (line.find("XP-PEN DECO 02") == std::string::npos) {
-            continue;
-        }
-
-        for (; line.rfind("H", 0) != 0; getline(devices, line)) {
-        };
-
-
-        for (; line.rfind("B: EV", 0) != 0 && line.rfind("I", 0) != 0;
-                getline(devices, line)) {
-        };
-
-        if (line.rfind("B: EV=1b", 0) == 0)
-            return number;
-    }
-
-    return {};
-};
-
-I: Bus=0003 Vendor=046d Product=c31c Version=0110
-N: Name="Logitech USB Keyboard Consumer Control"
-P: Phys=usb-0000:03:00.0-10/input1
-S: Sysfs=/devices/pci0000:00/0000:00:01.3/0000:03:00.0/usb1/1-10/1-10:1.1/0003:046D:C31C.0004/input/input23
-U: Uniq=
-H: Handlers=kbd event21 
-B: PROP=0
-B: EV=1b
-B: KEY=2010000 397ad8011001 e000000000000 0
-B: ABS=100000000
-B: MSC=10
-*/
-
-static const char* device_file_path = "/proc/bus/input/devices";
-
-auto pack_devices(std::vector<device_t*>& devices) {
-
+auto pack_devices(std::vector<device_t*>& devices) -> void {
     std::ifstream device_file { std::string(device_file_path), std::ios::in };
     if (!device_file) {
         std::cerr << "Could not open device file!" << std::endl;
@@ -101,8 +60,6 @@ auto pack_devices(std::vector<device_t*>& devices) {
                 << "\n";
         }
     }
-
-    return devices;
 };
 
 auto select(const std::vector<device_t*>& devices) -> device_t* {

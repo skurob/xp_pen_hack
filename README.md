@@ -1,7 +1,7 @@
 # This is a fork of the simple XP-Pen DECO 02 hack made by @vale981
 
 This simple program listens for the eraser events and runs shell
-commands in reaction to those events. I've some modifications in order
+commands in reaction to those events. I've made some modifications in order
 to have a better user experience and mostly to suit my needs.
 
 ## Side notes
@@ -9,11 +9,11 @@ to have a better user experience and mostly to suit my needs.
 This version of the `hack` is meant to work with my graphic tablet
 the XP-Pen G640, the only thing that really changes for the purpose of this
 program is the event code being dispatched by the event device when pressing
-pen side button.
+the pen side button.
 
 ### The event codes:
- - 331 XP-Pen G640
- - 321 XP-Pen DECO 02
+ - `331` XP-Pen G640
+ - `321` XP-Pen DECO 02
 
 ## Install
  - `make install` and you're good

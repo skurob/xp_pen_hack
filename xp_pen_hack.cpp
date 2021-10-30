@@ -17,7 +17,6 @@ typedef struct device {
     std::string evt_n;
 } device_t;
 
-
 auto pack_devices(std::vector<device_t*>& devices) -> void {
     std::ifstream device_file { std::string(device_file_path), std::ios::in };
     if (!device_file) {
@@ -107,7 +106,6 @@ int main(int argc, char** argv) {
         verbosity = true;
 
     std::vector<device_t*> devices;
-    device_t* selected_device;
     pack_devices(devices);
     listen(select(devices));
     return 0;
